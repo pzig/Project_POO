@@ -1,7 +1,9 @@
 package br.senac.sp.model;
 
 import java.time.LocalDate;
-import br.senac.sp.enumeration.*;
+// import br.senac.sp.enumeration.Escolaridade;
+// import br.senac.sp.enumeration.EstadoCivil;
+
 
 public class Cliente {
     private int id;
