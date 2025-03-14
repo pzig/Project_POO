@@ -1,6 +1,7 @@
 package br.senac.sp.model;
 
 import java.time.LocalDate;
+import br.senac.sp.enumeration.*;
 
 public class Cliente {
     private int id;

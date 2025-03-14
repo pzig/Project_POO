@@ -1,7 +1,8 @@
 package br.senac.sp.view;
 
 import java.awt.*;
-import javax.swing.*;
+import javax.swing.*;   
+
 
 public class ViewCliente extends JFrame{
     JLabel lbId, lbCpf, lbNome, lbNascimento;
@@ -20,7 +21,7 @@ public class ViewCliente extends JFrame{
 
     //neste metodo construiremos a tela
     private void initiComponents() {
-    fonteArial = new Font('Arial', Font.PLAIN, 14);
+    fonteArial = new Font("Arial", Font.PLAIN, 14);
 
         //lbId
         lbId = new Jlabel("ID: ");
