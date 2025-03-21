@@ -1,0 +1,4 @@
+br\senac\sp\enumeration\Escolaridade.class
+br\senac\sp\view\ViewCliente.class
+br\senac\sp\enumeration\EstadoCivil.class
+br\senac\sp\model\Cliente.class
