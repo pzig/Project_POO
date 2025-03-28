@@ -85,4 +85,8 @@ public class ClienteDao implements InterfaceDao<Cliente> {
         stmt.close();
         return clientes;
     }
+
+    @Override
+    public void buscar(int id) throws SQLException {
+    }
 }
