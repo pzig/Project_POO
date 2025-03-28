@@ -1,5 +1,8 @@
 package br.senac.sp.view;
 
+import br.senac.sp.dao.ClienteDao;
+import br.senac.sp.dao.ConnectionFactory;
+import br.senac.sp.dao.InterfaceDao;
 import br.senac.sp.enumeration.Escolaridade;
 import br.senac.sp.enumeration.EstadoCivil;
 import br.senac.sp.model.Cliente;
@@ -8,6 +11,8 @@ import javax.swing.*;
 import javax.swing.text.MaskFormatter;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -23,8 +28,17 @@ public class ViewCliente extends JFrame {
     JComboBox<EstadoCivil> cbEstadoCivil;
     JButton btSalvar;
     Cliente cliente;
+    Connection conexao;
+    InterfaceDao<Cliente> daoCliente;
 
     public ViewCliente() {
+        try {
+            conexao = ConnectionFactory.getConexao();
+            daoCliente = new ClienteDao(conexao);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
+        }
         initComponents();
         actions();
     }
@@ -226,9 +240,16 @@ public class ViewCliente extends JFrame {
                 cliente.setEscolaridade((Escolaridade) cbEscolaridade.getSelectedItem());
                 cliente.setEstadoCivil((EstadoCivil) cbEstadoCivil.getSelectedItem());
                 cliente.setEndereco(taEndereco.getText());
+
+                //inserir no banco de dados
+                try {
+                    daoCliente.inserir(cliente);
+                } catch (SQLException e1) {
+                    JOptionPane.showMessageDialog(ViewCliente.this, "Erro ao inserir: "+e1.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+                    e1.printStackTrace();
+                }
             }
         });
-
         // permitir somente números na tfCpf
         tfCpf.addKeyListener(new KeyAdapter() {
             @Override
@@ -239,6 +260,4 @@ public class ViewCliente extends JFrame {
             }
         });
     }
-
-
 }
